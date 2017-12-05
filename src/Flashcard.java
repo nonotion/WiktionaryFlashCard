@@ -3,7 +3,7 @@
  */
 
 /**
- * @author Alan
+ * @author Alan & Ziyang
  *
  */
 public class Flashcard {
