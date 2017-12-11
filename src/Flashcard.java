@@ -1,48 +1,32 @@
 /**
  * 
  */
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import fastily.jwiki.core.Wiki;
+import java.io.File;
 
 /**
  * @author Alan & Ziyang
  *
  */
 public class Flashcard {
-
+	private static final String verbs = "Russian Verbs.txt";
+	private static final String verb1stPerson = "russ 1.txt";
+	private static final String verb1stPersonPl = "russ 1pl.txt";
+	private static final String verb2ndPerson = "russ 2.txt";
+	private static final String verb2ndPersonPl = "russ 2pl.txt";
+	private static final String verb3rdPerson = "russ 3.txt";
+	private static final String verb3rdPersonPl = "russ 3pl.txt";
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//test
-		// Gets the text of the main page and prints it.
-		//Wiki wiki = new Wiki("en.wikipedia.org");
-		//System.out.println(wiki.getPageText("Main Page"));
-		//Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+		while(showFlashcard()) {
+		}
 	}
 	
-	private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("HelloWorldSwing");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
-        //Add the ubiquitous "Hello World" label.
-        JLabel label = new JLabel("Hello World");
-        frame.getContentPane().add(label);
- 
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
+	public static boolean showFlashcard() {
+		
+		return false;
+	}
  
 }
 
