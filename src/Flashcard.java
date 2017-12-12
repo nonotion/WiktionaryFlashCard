@@ -8,6 +8,7 @@
  */
 import java.io.File;
 import java.util.Random;
+import java.util.Scanner;
 /**
  * This class is the main class.
  */
@@ -31,8 +32,11 @@ public class Flashcard {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		//loops main function until user exits.
 		while(showFlashcard()) {
 		}
+		
+		System.out.println("Goodbye!");
 	}
 	
 	/**
@@ -41,6 +45,7 @@ public class Flashcard {
 	 * @param filename
 	 * @return Returns a random line and line number  from a file specified.
 	 */
+//TO DO
 	public static String[] getRandomLine(String filename){
 		return null;
 	}
@@ -51,22 +56,25 @@ public class Flashcard {
 	 * @param line line number to grab
 	 * @return Returns a random line from a file specified. Null if error.
 	 */
-	public static String getLine(String filename, int line){
+//TO DO
+	public static String getLine(String filename, int lineNumber){
 		return null;
 	}
 	
 	/**
-	 * This is the main driver function. It randomly
-	 * @return true if not error.
+	 * This is the main driver function. It should return false if the user quits or there is an error 
+	 * (file not found).
+	 * @return true if not error or user quit.
 	 */
+//TO DO - input scanner part.
 	public static boolean showFlashcard() {
 		//word to quiz on
 		String[] wordAndLine = getRandomLine(verbs);
 		String word = wordAndLine[0];
-		String correctAnswer;
+		String correctAnswer = word;
 		int line = Integer.valueOf(wordAndLine[1]);
-		
-		boolean plural = false;
+		boolean plural;
+		Random rand = new Random();
 		/* Choose random number between 1 and 6. 1 is 1st person, 2 is 2nd person,
 		 *  3 is third, 4 is 1st person plural. 5th is 2nd person plural, 6th is 3rd person plural. */
 		int person = rand.nextInt(5) + 1;
@@ -78,36 +86,45 @@ public class Flashcard {
 		
 		//Prompt
 		if (!plural) {
-			if (((person % 3) + 1) == 1) {
+			if (person == 1) {
 				System.out.println("1st person singular of \"" + word + "\":");
 				correctAnswer = getLine(verb1stPerson, line);
 			}
-			if (((person % 3) + 1) == 2) {
+			if (person == 2) {
 				System.out.println("2nd person singular of \"" + word + "\":");
 				correctAnswer = getLine(verb2ndPerson, line);
 			}
-			if (((person % 3) + 1) == 3) {
+			if (person == 3) {
 				System.out.println("3rd person singular of \"" + word + "\":");
 				correctAnswer = getLine(verb3rdPerson, line);
 			}
 		} else {
-			if (((person % 3) + 1) == 1) {
+			if (person == 4) {
 				System.out.println("1st person plural of \"" + word + "\":");
 				correctAnswer = getLine(verb1stPersonPl, line);
 			}
-			if (((person % 3) + 1) == 2) {
+			if (person == 5) {
 				System.out.println("2nd person plural of \"" + word + "\":");
 				correctAnswer = getLine(verb2ndPersonPl, line);
 			}
-			if (((person % 3) + 1) == 3) {
+			if (person == 6) {
 				System.out.println("3rd person plural of \"" + word + "\":");
 				correctAnswer = getLine(verb3rdPersonPl, line);
 			}
 		}
 		//input scanner goes here:
+		Scanner inputScanner = new Scanner(System.in);
 		String userInput = "";
+		if (userInput.contains("q") || userInput.contains("Q")) {
+			return false;
+		}
+		if (correctAnswer.equals(userInput)) {
+			System.out.println("Correct!");
+		} else {
+			System.out.println("Incorrect.");
+		}
 		
-		return false;
+		return true;
 	}
  
 }
