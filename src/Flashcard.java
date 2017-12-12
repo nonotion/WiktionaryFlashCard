@@ -7,6 +7,8 @@
  * @author Alan & Ziyang
  */
 import java.io.File;
+import java.net.URI;
+import java.security.InvalidParameterException;
 import java.util.Random;
 import java.util.Scanner;
 /**
@@ -27,7 +29,6 @@ public class Flashcard {
 	private static final String verb3rdPerson = "russ 3.txt";
 	/** File with verbs in 3rd person plural. **/
 	private static final String verb3rdPersonPl = "russ 3pl.txt";
-	
 	/**
 	 * @param args
 	 */
@@ -35,7 +36,6 @@ public class Flashcard {
 		//loops main function until user exits.
 		while(showFlashcard()) {
 		}
-		
 		System.out.println("Goodbye!");
 	}
 	
@@ -47,7 +47,21 @@ public class Flashcard {
 	 */
 //TO DO
 	public static String[] getRandomLine(String filename){
-		return null;
+        String contentsFilePath;
+        String[] dictionary;
+		try {
+			contentsFilePath = Flashcard.class.getClassLoader().getResource(filename).getFile();
+			contentsFilePath = new URI(contentsFilePath).getPath();
+            File contentsFile = new File(contentsFilePath);
+            Scanner contentsScanner = new Scanner(contentsFile, "UTF-8");
+            dictionary = contentsScanner.useDelimiter("\\A").next().split("\\s+");
+            contentsScanner.close();
+		} catch (Exception e) {
+			throw new InvalidParameterException("Bad file path" + e);
+		}
+		int lineNum = (int)(Math.random()*dictionary.length);
+		String ln = Integer.toString(lineNum + 1);
+		return new String[]{dictionary[lineNum], ln};
 	}
 	
 	/**
@@ -58,7 +72,19 @@ public class Flashcard {
 	 */
 //TO DO
 	public static String getLine(String filename, int lineNumber){
-		return null;
+        String contentsFilePath;
+        String[] dictionary;
+		try {
+			contentsFilePath = Flashcard.class.getClassLoader().getResource(filename).getFile();
+			contentsFilePath = new URI(contentsFilePath).getPath();
+            File contentsFile = new File(contentsFilePath);
+            Scanner contentsScanner = new Scanner(contentsFile, "UTF-8");
+            dictionary = contentsScanner.useDelimiter("\\A").next().split("\\s+");
+            contentsScanner.close();
+		} catch (Exception e) {
+			throw new InvalidParameterException("Bad file path" + e);
+		}
+		return dictionary[lineNumber - 1];
 	}
 	
 	/**
@@ -114,7 +140,8 @@ public class Flashcard {
 		}
 		//input scanner goes here:
 		Scanner inputScanner = new Scanner(System.in);
-		String userInput = "";
+		String userInput = inputScanner.nextLine();
+		inputScanner.close();
 		if (userInput.contains("q") || userInput.contains("Q")) {
 			return false;
 		}
@@ -123,9 +150,8 @@ public class Flashcard {
 		} else {
 			System.out.println("Incorrect.");
 		}
-		
 		return true;
 	}
- 
+	
 }
 
